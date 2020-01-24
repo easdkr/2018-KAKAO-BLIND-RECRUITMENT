@@ -25,10 +25,12 @@ int solution(string str1, string str2) {
 	sort(mulset1.begin(), mulset1.end());
 	sort(mulset2.begin(), mulset2.end());
 	int interSetSize = getInterSectionSize(mulset1, mulset2);
+	//합집합의 크기 : a집합 + b집합 - a와b의 교집합
 	int unionSize = mulset1.size() + mulset2.size() - interSetSize;
 	answer = ((double(interSetSize) / double(unionSize)) * double(mulval));
 	return answer;
 }
+//교집합의 크기를 반환한다. 
 int getInterSectionSize(vector<string>& mulset1, vector<string>& mulset2) {
 	int ret = 0;
 	for (int iter1 = 0, iter2 = 0; iter1 < mulset1.size() && iter2 < mulset2.size();) {
@@ -45,6 +47,7 @@ int getInterSectionSize(vector<string>& mulset1, vector<string>& mulset2) {
 	}
 	return ret;
 }
+//문자열을 두 글자씩 끊어 다중집합을 만들어 반환한다.
 vector<string> transferMultiSet(string& str) {
 	vector<string> ret;
 	char upperA = 'A', upperZ = 'Z';
@@ -60,6 +63,8 @@ vector<string> transferMultiSet(string& str) {
 	}
 	return ret;
 }
+//모든 문자열을 대문자로 변환한다. 
+//특수문자나 공백인 경우 그냥 똑같이 삽입
 string toUpperCase(string& str) {
 	string ret = "";
 	char lowerA = 'a', lowerZ = 'z';

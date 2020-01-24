@@ -74,4 +74,43 @@ LRU(가장 사용한지 오래된 페이지부터 교체)를 구현하는 문제
  ```
  #### 코드 : [4번 셔틀버스](./CodingTest(1)/(4)셔틀버스(succ코드).cpp)
 
+ ### 5. 뉴스 클러스터링
+
+ ##### 문제 링크 : https://programmers.co.kr/learn/courses/30/lessons/17677
+
+ #### 구현 설명 (1, set_ 함수 사용)
+ ```
+ c++ stl의 set관련 함수를 사용하여 구현했다 
  
+ C++의 set 함수로 문제에서 요구하는 "중복을 허용하는 다중집합"을 구현할 수 있기 때문에 
+
+ set_union과 set_interaction을 사용하여 쉽게구현했다. 
+ ```
+ #### 코드 : [5번 뉴스 클러스터링 set_ 사용](./CodingTest(1)/(5)뉴스클러스터링.cpp)
+
+ #### 구현 설명(2, set_함수 사용X)
+ ```
+ 직접 교집합의 원소의 개수를 세어 구현한 코드이다. 
+ 합집합의 크기 : a집합 + b집합 - a와b의 교집합이기 때문에
+ 따로 합집합의 크기를 구할 필요가 없이 구현할 수 있다.
+ ```
+ ```C++
+ //교집합의 원소의 개수 구하는 코드
+ int getInterSectionSize(vector<string>& mulset1, vector<string>& mulset2) {
+	int ret = 0;
+	for (int iter1 = 0, iter2 = 0; iter1 < mulset1.size() && iter2 < mulset2.size();) {
+		string elem1 = mulset1[iter1], elem2 = mulset2[iter2];
+		int compareVal = elem1.compare(elem2);
+		//같으면 개수추가 
+		if (compareVal == 0) {
+			ret++;
+			iter1++;
+			iter2++;
+		}
+		else if (compareVal < 0) iter1++;
+		else iter2++;
+	}
+	return ret;
+}
+ ```
+ #### 코드 : [5번 뉴스 클러스터링 set_ 미사용](./CodingTest(1)/(5)뉴스클러스터링(2).cpp)

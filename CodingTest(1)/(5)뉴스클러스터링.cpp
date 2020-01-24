@@ -20,12 +20,14 @@ int getInterSectionSize(vector<string>& mulset1, vector<string>& mulset2);
 int getUnionSize(vector<string>& mulset1, vector<string>& mulset2);
 vector<string> transferMultiSet(string& str);
 string toUpperCase(string& str);
+
 int solution(string str1, string str2) {
     int answer = 0;
     str1 = toUpperCase(str1);
     str2 = toUpperCase(str2);
     auto mulset1 = transferMultiSet(str1);
     auto mulset2 = transferMultiSet(str2);
+    //둘 다 다중집합의 원소가 없는 경우 
     if (mulset1.size() == 0 && mulset2.size() == 0)
         return 1 * mulval;
     sort(mulset1.begin(), mulset1.end());
@@ -35,6 +37,7 @@ int solution(string str1, string str2) {
     answer = ((double(interSetSize) / double(unionSize)) * double(mulval));
     return answer;
 }
+//교집합의 크기를 반환한다. 
 int getInterSectionSize(vector<string>& mulset1, vector<string>& mulset2) {
     vector<string> interSet;
     interSet.resize(mulset1.size() + mulset2.size());
@@ -42,6 +45,7 @@ int getInterSectionSize(vector<string>& mulset1, vector<string>& mulset2) {
     interSet.erase(iter, interSet.end());
     return interSet.size();
 }
+//합집합의 크기를 반환한다.
 int getUnionSize(vector<string>& mulset1, vector<string>& mulset2) {
     vector<string> unionSet;
     unionSet.resize(mulset1.size() + mulset2.size());
@@ -49,6 +53,7 @@ int getUnionSize(vector<string>& mulset1, vector<string>& mulset2) {
     unionSet.erase(iter, unionSet.end());
     return unionSet.size();
 }
+//문자열을 두 글자씩 끊어 다중집합을 만들어 반환한다. 
 vector<string> transferMultiSet(string& str) {
     vector<string> ret;
     char upperA = 'A', upperZ = 'Z';
@@ -64,6 +69,8 @@ vector<string> transferMultiSet(string& str) {
     }
     return ret;
 }
+//모든 문자열을 대문자로 변환한다. 
+//특수문자나 공백인 경우 그냥 똑같이 삽입
 string toUpperCase(string& str) {
     string ret = "";
     char lowerA = 'a', lowerZ = 'z';
