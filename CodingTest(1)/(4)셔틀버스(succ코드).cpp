@@ -62,7 +62,7 @@ string solution(int n, int t, int m, vector<string> timetable) {
 	answer = minuteToStringTime(retMinute);
 	return answer;
 }
-
+//분을 시:분 문자열로 바꿔 반환한다. 
 string minuteToStringTime(int minutes) {
 	string time;
 	int hour = minutes / 60;
