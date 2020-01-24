@@ -15,13 +15,12 @@ VS에서만 돌아갔다.
 #include <string>
 #include <vector>
 using namespace std;
-string LowToUpper(string str);
+string LowToUpper(string& str);
 int solution(int cacheSize, vector<string> cities) {
 	//모두 대문자 글자로 바꿔주기
 	for (int i = 0; i < cities.size(); ++i)
 		cities[i] = LowToUpper(cities[i]);
 	int answer = 0;
-	//만약 캐시 사이즈가 0이면 
 	vector<string> cache;
 	for (string city : cities) {
 		//캐시가 비어있는 경우
@@ -66,9 +65,8 @@ int solution(int cacheSize, vector<string> cities) {
 	}
 	return answer;
 }
-
-
-string LowToUpper(string str) {
+//문자열의 모든 소문자를 대문자로 바꿔준다.
+string LowToUpper(string& str) {
 	for (int i = 0; i < int(str.size()); ++i) {
 		if (str[i] >= 'a' && str[i] <= 'z')
 			str[i] = str[i] + char(-32);
