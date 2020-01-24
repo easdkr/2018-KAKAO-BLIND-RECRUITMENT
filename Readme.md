@@ -14,7 +14,7 @@
  ```  
  #### 코드 : [1번 비밀 지도](./CodingTest(1)/(1)비밀지도.cpp)
 
- ### 2. 다트 게임
+### 2. 다트 게임
 
  ##### 문제 링크 : https://programmers.co.kr/learn/courses/30/lessons/17682
 
@@ -41,7 +41,7 @@ LRU(가장 사용한지 오래된 페이지부터 교체)를 구현하는 문제
 ```
  #### 코드 : [3번 캐시](./CodingTest(1)/(3)캐시.cpp)
 
- ### 4. 셔틀버스
+### 4. 셔틀버스
 
  ##### 문제 링크 : https://programmers.co.kr/learn/courses/30/lessons/17678
 
@@ -74,7 +74,7 @@ LRU(가장 사용한지 오래된 페이지부터 교체)를 구현하는 문제
  ```
  #### 코드 : [4번 셔틀버스](./CodingTest(1)/(4)셔틀버스(succ코드).cpp)
 
- ### 5. 뉴스 클러스터링
+### 5. 뉴스 클러스터링
 
  ##### 문제 링크 : https://programmers.co.kr/learn/courses/30/lessons/17677
 
@@ -85,6 +85,11 @@ LRU(가장 사용한지 오래된 페이지부터 교체)를 구현하는 문제
  C++의 set 함수로 문제에서 요구하는 "중복을 허용하는 다중집합"을 구현할 수 있기 때문에 
 
  set_union과 set_interaction을 사용하여 쉽게구현했다. 
+
+ ex) 
+ set_union 함수가 완전 중복 원소를 하나만 가지는건 아니고 
+ vec1이 {1,1,2} vec2가 {1,1,1,3}이면 
+ union = {1,1,1,2,3} 이렇게 됨 (중복된 다중 원소는 더 개수가 많은 쪽을 선택?)
  ```
  #### 코드 : [5번 뉴스 클러스터링 set_ 사용](./CodingTest(1)/(5)뉴스클러스터링.cpp)
 
@@ -114,3 +119,42 @@ LRU(가장 사용한지 오래된 페이지부터 교체)를 구현하는 문제
 }
  ```
  #### 코드 : [5번 뉴스 클러스터링 set_ 미사용](./CodingTest(1)/(5)뉴스클러스터링(2).cpp)
+
+### 6번 프렌즈 4 블록 
+
+ ##### 문제 링크 : https://programmers.co.kr/learn/courses/30/lessons/17679
+
+ #### 구현 설명
+ ```
+  입력 값이 최대 30X30으로 작기 때문에 완전탐색으로도 충분히 해결할 수 있는 문제였다.
+  삭제하고 블럭들을 밑으로 내려주는걸 어떻게 구현할까 고민했는데 (벡터로 하나하나 내려주는건 번거롭다고 생각했다)
+  삭제한 블럭들을 제외하고 스택에 담은 뒤, 나머지부분을 삭제한 블록으로 채우고, 
+  스택의 값을 다시 벡터에 넣는 식으로 구현했다. 
+
+  1. 블럭 string 벡터를 //<블록캐릭터, 삭제유무> 쌍의 벡터로 만든다 (삭제되면 true, 삭제되지 않았으면 false)
+  2. 완전탐색을 진행하며 제거할 수 있는 블럭을 체크하고, 제거할 수 있는 블럭의 수를 반환한다. 
+  3. 제거할 수 있는 블럭 수가 0이상이면 블럭을 제거하고 아래로 내려준다. (stack 이용)
+  4. 2번으로 되돌아가고 제거할 수 있는 블럭의 수가 0일때까지 반복한다.  
+ ```
+ 
+ ```C++
+ //블럭을 제거하고 아래로 내려준다.
+void eraseBlock(vector<vector<pair<char, bool>>>& board, int height, int width) {
+	stack<pair<char, bool>> s;
+	for (int x = 0; x < width; ++x) {
+		//삭제되지 않을 블럭을 아래부터 순서대로 스택에 채운다
+		for (int y = height - 1; y >= 0; --y) {
+			if (!board[y][x].second)
+				s.push(make_pair(board[y][x].first, false));
+		}
+		//나머지부분을 모두 삭제된 블럭으로 채운다
+		while (s.size() != height)
+			s.push(make_pair(' ', true));
+		//다시 board에 넣어준다. 
+		for (int y = 0; y < height; ++y) {
+			board[y][x] = s.top();
+			s.pop();
+		}
+	}
+}
+ ```
