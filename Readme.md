@@ -136,7 +136,7 @@ LRU(가장 사용한지 오래된 페이지부터 교체)를 구현하는 문제
   3. 제거할 수 있는 블럭 수가 0이상이면 블럭을 제거하고 아래로 내려준다. (stack 이용)
   4. 2번으로 되돌아가고 제거할 수 있는 블럭의 수가 0일때까지 반복한다.  
  ```
- 
+
  ```C++
  //블럭을 제거하고 아래로 내려준다.
 void eraseBlock(vector<vector<pair<char, bool>>>& board, int height, int width) {
@@ -158,3 +158,4 @@ void eraseBlock(vector<vector<pair<char, bool>>>& board, int height, int width) 
 	}
 }
  ```
+ #### 코드 : [6번 프렌즈 4 블록](./CodingTest(1)/(6)프렌즈4블록.cpp)
