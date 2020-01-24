@@ -25,7 +25,6 @@ int solution(vector<string> lines) {
 			auto log = timeLog[j];
 			if(startTime <= log.second && startTime + 1000 > log.first)
 				thoughoutStart++;
-
 		}
 		for (int j = 0; j < int(timeLog.size()); ++j) {
 			auto log = timeLog[j];

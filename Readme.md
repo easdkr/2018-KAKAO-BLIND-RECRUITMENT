@@ -159,3 +159,32 @@ void eraseBlock(vector<vector<pair<char, bool>>>& board, int height, int width) 
 }
  ```
  #### 코드 : [6번 프렌즈 4 블록](./CodingTest(1)/(6)프렌즈4블록.cpp)
+
+### 7번 추석트래픽
+
+ ##### 문제 링크 : https://programmers.co.kr/learn/courses/30/lessons/17676
+
+ #### 구현 설명 
+ ```
+  감이 안잡혀서 설명을 보고도 한참을 해맸던 문제이다 
+  문제 해설에서 보면 요청량이 변하는 순간은 각 로그의 시작과 끝이라고 나온다. 
+  이를 이용해서 각 로그의 시작 ~ 시작+1초 , 끝 ~ 끝+1초 부분의 요청량을 검사하여 최대값을 찾아내는 문제이다. 
+
+  point : 
+   1. 시간을 정수 단위로 변환할 것(0.001ms : 1 로 변환)(실수로 계산하면 오차가 발생함)
+   2. log를 시작시간이 빠른 순으로 정렬한다. 
+   3. 해당구간에 실행중인게 있는지 확인하는 조건
+
+  3번조건을 못세워서 계속 실패했었다.. 
+ ```
+```C++
+// log의 second에 종료시간, first에 시작시간이 저장되어있다.
+// 종료시간은 기준시간보다 늦거나 같은 시간이어야하고, 
+// 시작시간은 기준시간+1초보다 이른 시간이어야한다. 
+for (int j = 0; j < int(timeLog.size()); ++j) {
+			auto log = timeLog[j];
+			if(startTime <= log.second && startTime + 1000 > log.first)
+				thoughoutStart++;
+}
+```
+ #### 코드 : [7번 추석트래픽](./CodingTest(1)/(7)추석트래픽(성공).cpp)
